@@ -16,5 +16,16 @@ namespace Api.Services
         {
             return await _employeeRepository.SelectAllEmployeesAsync();
         }
+
+        public async Task<(GetEmployeeDto?, string)> GetEmployeeByIdAsync(int id)
+        {
+            try
+            {
+                return (await _employeeRepository.SelectEmployeeAsync(id), "");
+            } catch (Exception ex)
+            {
+                return (null, ex.Message);
+            }
+        }
     }
 }

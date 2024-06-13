@@ -79,6 +79,19 @@ namespace Api.Repositories
             return await SimulateEmployeeDatabaseFetching();
         }
 
+        public async Task<GetEmployeeDto> SelectEmployeeAsync(int id)
+        {
+            var employees = await SimulateEmployeeDatabaseFetching();
+            var employee = employees.Where(x =>  x.Id == id).FirstOrDefault();
+
+            if (employee == null)
+            {
+                throw new Exception("The employee was not found");
+            }
+
+            return employee;
+        }
+
         private async Task<List<GetEmployeeDto>> SimulateEmployeeDatabaseFetching()
         {
             var employees = Employees;
