@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<Api.Services.Interfaces.IEmployeeService, Api.Services.EmployeeService>();
+builder.Services.AddScoped<Api.Repositories.Interfaces.IEmployeeRepository, Api.Repositories.EmployeeRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -32,6 +35,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseCors(allowLocalhost);
