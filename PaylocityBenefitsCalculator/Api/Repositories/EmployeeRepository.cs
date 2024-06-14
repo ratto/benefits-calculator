@@ -7,7 +7,8 @@ namespace Api.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        public List<GetEmployeeDto> Employees { get; } = new List<GetEmployeeDto>() {
+        public List<GetEmployeeDto> Employees { get; } = new List<GetEmployeeDto>()
+        {
             new()
             {
                 Id = 1,

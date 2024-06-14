@@ -6,5 +6,6 @@ namespace Api.Services.Interfaces
     {
         Task<List<GetEmployeeDto>> GetAllEmployeesAsync();
         Task<(GetEmployeeDto?, string)> GetEmployeeByIdAsync(int id);
+        decimal CalculateEmployeePaycheck(GetEmployeeDto employee);
     }
 }

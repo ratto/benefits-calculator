@@ -33,11 +33,11 @@ public class EmployeesController : ControllerBase
         };
 
         if (!result.Success) return NotFound(result);
-        
+
         return Ok(result);
     }
 
-    [SwaggerOperation(Summary = "Get all employees")]
+    [SwaggerOperation(Summary = "Get all employees and their dependents")]
     [HttpGet("")]
     public async Task<ActionResult<ApiResponse<List<GetEmployeeDto>>>> GetAll()
     {
@@ -49,5 +49,26 @@ public class EmployeesController : ControllerBase
         };
 
         return result;
+    }
+
+    [SwaggerOperation(Summary = "Calculate yearly salary")]
+    [HttpGet("/calculate/{id}")]
+    public async Task<ActionResult<decimal>> GetPaycheckFromEmployee(int id)
+    {
+        var (employee, errorMessage) = await _employeeService.GetEmployeeByIdAsync(id);
+
+        var result = new ApiResponse<GetEmployeeDto>
+        {
+            Data = employee,
+            Success = employee != null,
+            Error = errorMessage,
+            Message = errorMessage ?? "Employee found!"
+        };
+
+        if (!result.Success) return NotFound(result);
+
+        var paycheck = _employeeService.CalculateEmployeePaycheck(result.Data!);
+
+        return Ok(paycheck);
     }
 }

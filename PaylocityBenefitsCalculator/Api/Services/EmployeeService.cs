@@ -28,5 +28,10 @@ namespace Api.Services
                 return (null, ex.Message);
             }
         }
+
+        public decimal CalculateEmployeePaycheck(GetEmployeeDto employee)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
