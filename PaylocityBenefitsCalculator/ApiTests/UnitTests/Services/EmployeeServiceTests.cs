@@ -108,11 +108,11 @@ namespace ApiTests.UnitTests.Services
                 Id = 1,
                 FirstName = "John",
                 LastName = "Doe",
-                Salary = 100000.00m,
+                Salary = 80000.00m,
                 DateOfBirth = new DateTime(1984, 12, 30)
             };
 
-            decimal expectedPaycheck = 3769.23m;
+            decimal expectedPaycheck = 1015.38m;
 
             decimal actualPaycheck = _sut.CalculateEmployeePaycheck(employee);
 

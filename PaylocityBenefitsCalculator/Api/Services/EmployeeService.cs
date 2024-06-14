@@ -31,7 +31,36 @@ namespace Api.Services
 
         public decimal CalculateEmployeePaycheck(GetEmployeeDto employee)
         {
-            throw new NotImplementedException();
+            decimal deduction = 0.00m;
+
+            decimal employeeDeduction = 1000.00m * 12;
+
+            deduction += employeeDeduction;
+
+            if (employee.Dependents.Count > 0)
+            {
+                DateTime currentDate = DateTime.Now;
+
+                decimal dependentsDeduction = (employee.Dependents.Count * 600.00m) * 12;
+
+                foreach(var dependent in employee.Dependents)
+                {
+                    var age = currentDate.Year - dependent.DateOfBirth.Year;
+
+                    if (age >= 50)
+                    {
+                        dependentsDeduction += (200.00m * 12);
+                    }
+                }
+
+                deduction += dependentsDeduction;
+            }
+
+            var paycheck = (employee.Salary - deduction) / 26;
+
+            if (employee.Salary >= 80000.00m) paycheck -= (employee.Salary * 0.02m);
+
+            return Decimal.Round(paycheck, 2);
         }
     }
 }
