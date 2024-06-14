@@ -1,4 +1,5 @@
-﻿using Api.Dtos.Employee;
+﻿using Api.Dtos.Dependent;
+using Api.Dtos.Employee;
 
 namespace Api.Services.Interfaces
 {
@@ -6,6 +7,7 @@ namespace Api.Services.Interfaces
     {
         Task<List<GetEmployeeDto>> GetAllEmployeesAsync();
         Task<(GetEmployeeDto?, string)> GetEmployeeByIdAsync(int id);
+        (GetEmployeeDto?, string) PostDependentForEmployee(GetEmployeeDto employee, GetDependentDto dependent);
         decimal CalculateEmployeePaycheck(GetEmployeeDto employee);
     }
 }

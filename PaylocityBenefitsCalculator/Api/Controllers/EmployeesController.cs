@@ -51,6 +51,38 @@ public class EmployeesController : ControllerBase
         return result;
     }
 
+    [SwaggerOperation(Summary = "Include a new dependent")]
+    [HttpPost("/dependent/{id}")]
+    public async Task<ActionResult> AddDependentForEmployee([FromBody] GetDependentDto dependent, int id)
+    {
+        string errorMessage;
+        (var employee, errorMessage) = await _employeeService.GetEmployeeByIdAsync(id);
+
+        var result = new ApiResponse<GetEmployeeDto>
+        {
+            Data = employee,
+            Success = employee != null,
+            Error = errorMessage,
+            Message = errorMessage ?? "Employee found!"
+        };
+
+        if (!result.Success) return NotFound(result);
+
+        (var changedEmployee, errorMessage) = _employeeService.PostDependentForEmployee(result.Data!, dependent);
+
+        result = new ApiResponse<GetEmployeeDto>
+        {
+            Data = changedEmployee,
+            Success = changedEmployee != null,
+            Error = errorMessage,
+            Message = changedEmployee != null ? "Dependent added!" : "Remove the current partner or change the spouse or domestic partner from this employee before adding this dependent."
+        };
+
+        if (!result.Success) return BadRequest(result);
+
+        return Ok(result);
+    }
+
     [SwaggerOperation(Summary = "Calculate yearly salary")]
     [HttpGet("/calculate/{id}")]
     public async Task<ActionResult<decimal>> GetPaycheckFromEmployee(int id)

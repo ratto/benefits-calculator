@@ -1,4 +1,5 @@
-﻿using Api.Dtos.Employee;
+﻿using Api.Dtos.Dependent;
+using Api.Dtos.Employee;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
 
@@ -27,6 +28,15 @@ namespace Api.Services
             {
                 return (null, ex.Message);
             }
+        }
+
+        public (GetEmployeeDto?, string) PostDependentForEmployee(GetEmployeeDto employee, GetDependentDto dependent)
+        {
+            if (employee.Dependents.Where(x => x.Relationship == Models.Relationship.Spouse || x.Relationship == Models.Relationship.DomesticPartner).Any() && (dependent.Relationship == Models.Relationship.Spouse || dependent.Relationship == Models.Relationship.DomesticPartner)) return (null, "Each employee can't have more than one spouse or domestic partner.");
+
+            employee.Dependents.Add(dependent);
+
+            return (employee, "");
         }
 
         public decimal CalculateEmployeePaycheck(GetEmployeeDto employee)
