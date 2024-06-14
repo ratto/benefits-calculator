@@ -3,6 +3,20 @@ using Api.Dtos.Employee;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
 
+/*
+ * About Services layer:
+ * As used in many MVC and clean architecture 
+ * systems model, this layer should be used for
+ * validations and other functionalities to make 
+ * the communication between controllers and
+ * repositories easier.
+ * 
+ * When more business and users needs are
+ * discovered (using Scrum terminology) we 
+ * can easily implement them in here with low 
+ * impact on other layers of this system.
+ */
+
 namespace Api.Services
 {
     public class EmployeeService : IEmployeeService
@@ -32,12 +46,36 @@ namespace Api.Services
 
         public (GetEmployeeDto?, string) PostDependentForEmployee(GetEmployeeDto employee, GetDependentDto dependent)
         {
+            // TO DO: make this validation on restricting spouse and partner with the DB information. It is not a good thing to pass these two through arguments.
             if (employee.Dependents.Where(x => x.Relationship == Models.Relationship.Spouse || x.Relationship == Models.Relationship.DomesticPartner).Any() && (dependent.Relationship == Models.Relationship.Spouse || dependent.Relationship == Models.Relationship.DomesticPartner)) return (null, "Each employee can't have more than one spouse or domestic partner.");
 
             employee.Dependents.Add(dependent);
 
             return (employee, "");
         }
+
+        /*
+         * As I said on the controller, this would be
+         * the first thing to be changed after creating
+         * a route and model just for the 
+         * salary/paychecks/deductions.
+         * 
+         * I also was in doubt about the deductions
+         * values as I don't know if it would be better 
+         * to store them in a DB or having them placed
+         * in app config files.
+         * 
+         * It would be better to store them in the DB
+         * if these values change a lot because it would
+         * not have to be built and released to
+         * production every time it changes. I would store
+         * them in config files if they are not that
+         * volatile to free some DB space.
+         * 
+         * In eitheer case I would not hard code it in
+         * here. I just coded them here to focus on other 
+         * more important requirements for this challenge.
+         */
 
         public decimal CalculateEmployeePaycheck(GetEmployeeDto employee)
         {

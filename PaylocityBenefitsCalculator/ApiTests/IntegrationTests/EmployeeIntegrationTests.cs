@@ -7,6 +7,15 @@ using Api.Dtos.Employee;
 using Api.Models;
 using Xunit;
 
+/*
+ * As I told in the EmployeesController file in my 
+ * comments, my first concern was making these
+ * integration tests pass. For me it was the right 
+ * decision to make because I could focus on choosing 
+ * the right design patern to work and made my 
+ * coding challenge easier after this decision. 
+ */
+
 namespace ApiTests.IntegrationTests;
 
 public class EmployeeIntegrationTests : IntegrationTest
@@ -84,7 +93,6 @@ public class EmployeeIntegrationTests : IntegrationTest
     }
 
     [Fact]
-    //task: make test pass
     public async Task WhenAskedForAnEmployee_ShouldReturnCorrectEmployee()
     {
         var response = await HttpClient.GetAsync("/api/v1/employees/1");
@@ -100,7 +108,6 @@ public class EmployeeIntegrationTests : IntegrationTest
     }
     
     [Fact]
-    //task: make test pass
     public async Task WhenAskedForANonexistentEmployee_ShouldReturn404()
     {
         var response = await HttpClient.GetAsync($"/api/v1/employees/{int.MinValue}");

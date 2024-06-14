@@ -6,6 +6,18 @@ namespace Api.Repositories
 {
     public class DependentRepository : IDependentRepository
     {
+        /*
+         * This was another hard call that I really dislike
+         * but I had to do to focus on the main challenge.
+         * 
+         * I shouldn't repeat the same code in the
+         * EmployeeRepository. But it is the same as the 
+         * other repository file: after creating the DB and
+         * deciding wich DB-to-code approach, we can easily 
+         * change this whole file with low impact on the rest
+         * of the system (thanks to the chosen design patern).
+         */
+
         public List<GetDependentDto> Dependents { get; } = new List<GetDependentDto>()
         {
             new()

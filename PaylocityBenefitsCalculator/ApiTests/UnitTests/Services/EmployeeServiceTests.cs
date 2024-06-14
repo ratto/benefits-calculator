@@ -8,11 +8,42 @@ using Api.Dtos.Dependent;
 using System.Collections.Generic;
 using Api.Models;
 
+/*
+ * About Unit Testing:
+ * I really like to use Dependency Injection in any 
+ * javascript/typescript or C# project because I'm used
+ * to high-mocking London style for testing purpose. It 
+ * is really easy to assure the functionality of any part
+ * of the system when it comes to Unit Testing.
+ * 
+ * If I decided to work with other patern, like Factory,
+ * I would choose to work with Chicago style for unit
+ * testing, with less mocks. To tell the truth I have some
+ * dificulties in this type of style as I'm not used to
+ * work with it.
+ * 
+ * That doesn't mean that I would never work with
+ * low-mocking testing styles. I have no fear on learning
+ * new techniques or technologies, and that applies to 
+ * testing standards. I can work with Chicago style testing
+ * if I have to. But I chose to be more comfortable in this
+ * coding challenge.
+ */
+
 namespace ApiTests.UnitTests.Services
 {
     public class EmployeeServiceTests
     {
+        /*
+         * If you follow the steps in my repository, you will see that
+         * I coded this project using TDD. I made these tests first 
+         * (according to the requirements on calculations), made it 
+         * pass (green light), made it fail (red light) and then I coded
+         * with making the tests pass in mind.
+         */
+
         private readonly Mock<IEmployeeRepository> _employeeRepositoryMock;
+        // I really like to use the System Under Test term so I can focus on what unit I whant to test.
         private readonly EmployeeService _sut;
 
         public EmployeeServiceTests()

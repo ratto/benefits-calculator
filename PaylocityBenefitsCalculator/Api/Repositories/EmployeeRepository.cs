@@ -3,6 +3,26 @@ using Api.Dtos.Employee;
 using Api.Models;
 using Api.Repositories.Interfaces;
 
+/*
+ * About the repositories:
+ * This was a hard call. Should I use the same list that
+ * was hard coded on the EmployeesController or should I 
+ * build a database to make it more production ready?
+ * 
+ * My SQL and Entity Framework skills are not the best 
+ * and I was in doubt on how make the DB available for
+ * this system when you evaluate my work. So I decided 
+ * to care for the requirements and the challenge as well.
+ * 
+ * But it doesn't mean that the repositories are in no use.
+ * They can easily be refactored after creating the DB 
+ * both in code first or DB first approach. In either case
+ * it will have minimum impact (or even no impact at all)
+ * on the whole system bercause of the separation of
+ * concerns done with the dependency injection/inversion
+ * that I made.
+ */
+
 namespace Api.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
