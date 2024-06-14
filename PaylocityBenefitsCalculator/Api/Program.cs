@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<Api.Services.Interfaces.IEmployeeService, Api.Services.EmployeeService>();
+builder.Services.AddScoped<Api.Services.Interfaces.IDependentService, Api.Services.DependentService>();
 builder.Services.AddScoped<Api.Repositories.Interfaces.IEmployeeRepository, Api.Repositories.EmployeeRepository>();
+builder.Services.AddScoped<Api.Repositories.Interfaces.IDependentRepository, Api.Repositories.DependentRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -32,7 +32,7 @@ public class EmployeesController : ControllerBase
             Message = errorMessage ?? "Employee found!"
         };
 
-        if (result.Data == null) return NotFound(result);
+        if (!result.Success) return NotFound(result);
         
         return Ok(result);
     }

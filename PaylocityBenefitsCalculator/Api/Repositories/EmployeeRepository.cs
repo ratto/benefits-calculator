@@ -84,10 +84,7 @@ namespace Api.Repositories
             var employees = await SimulateEmployeeDatabaseFetching();
             var employee = employees.Where(x =>  x.Id == id).FirstOrDefault();
 
-            if (employee == null)
-            {
-                throw new Exception("The employee was not found");
-            }
+            if (employee == null) throw new Exception("The employee was not found");
 
             return employee;
         }

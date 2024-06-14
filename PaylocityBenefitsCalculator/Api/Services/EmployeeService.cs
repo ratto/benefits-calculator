@@ -22,7 +22,8 @@ namespace Api.Services
             try
             {
                 return (await _employeeRepository.SelectEmployeeAsync(id), "");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return (null, ex.Message);
             }
